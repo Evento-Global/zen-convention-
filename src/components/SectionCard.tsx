@@ -15,8 +15,10 @@ import {
   type MouseEvent,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { getOptionFromListedPrice } from '../data/galleryRates';
 import type { EventSection, EventStyleOption } from '../data/sections';
 import { resolveImageSrc } from '../data/sections';
+import { formatInr } from '../utils/pricing';
 import './SectionCard.css';
 
 interface SectionCardProps {
@@ -35,6 +37,8 @@ function BackOptionRow({ option, index, visible }: BackOptionRowProps) {
     event.stopPropagation();
   }, []);
 
+  const fromListed = getOptionFromListedPrice(option.id);
+
   return (
     <li className="card-back-item">
       <Link
@@ -48,7 +52,11 @@ function BackOptionRow({ option, index, visible }: BackOptionRowProps) {
         </span>
         <span className="card-back-row-main">
           <span className="card-back-row-label">{option.label}</span>
-          <span className="card-back-row-meta">View gallery</span>
+          <span className="card-back-row-meta">
+            {fromListed !== undefined
+              ? `From ${formatInr(fromListed)}`
+              : 'View gallery'}
+          </span>
         </span>
         <span className="card-back-row-arrow" aria-hidden>
           <svg viewBox="0 0 24 24" fill="none" focusable="false">

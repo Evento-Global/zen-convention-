@@ -1,0 +1,118 @@
+/**
+ * Cross-device layout — phones, tablets (iPad), and desktop.
+ * Imported after component CSS so these rules can refine breakpoints.
+ */
+
+html {
+  /* iOS dynamic toolbar: prefer dynamic viewport units */
+  min-height: 100dvh;
+}
+
+body,
+#root {
+  max-width: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Coarse pointer: comfortable tap targets (Apple HIG / Material ~44px) */
+@media (pointer: coarse) {
+  .pdp-back,
+  .lb-close,
+  .lb-nav,
+  .hero-cta,
+  .card-back-row {
+    min-height: 44px;
+  }
+
+  .lb-close,
+  .lb-nav {
+    min-width: 44px;
+  }
+
+  .pdp-gcell {
+    touch-action: manipulation;
+  }
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+/* ---------- narrow phones (iPhone SE, small Android) ---------- */
+@media (max-width: 380px) {
+  .moments-kicker,
+  .hero-eyebrow,
+  .pdp-head-kicker {
+    letter-spacing: 0.28em;
+  }
+
+  .pdp-gallery-grid {
+    gap: 0.5rem;
+  }
+}
+
+/* ---------- phone landscape / short viewport ---------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+    padding-bottom: 1rem;
+  }
+
+  .hero-frame {
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-tagline {
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
+  }
+
+  .hero-cta-rule {
+    height: 36px;
+  }
+
+  .hero-corner {
+    display: none;
+  }
+
+  .card-flip {
+    min-height: 0;
+    max-height: min(92vh, 92dvh);
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---------- tablet portrait (iPad, Android tablets) ---------- */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .moments-inner {
+    padding-inline: max(1.5rem, env(safe-area-inset-left, 0px))
+      max(1.5rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+/* ---------- tablet landscape & small laptops ---------- */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .pdp-gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- large desktop / ultrawide ---------- */
+@media (min-width: 1440px) {
+  .moments-inner,
+  .pdp-bc,
+  .pdp-head,
+  .pdp-gallery-section {
+    max-width: 1280px;
+  }
+}

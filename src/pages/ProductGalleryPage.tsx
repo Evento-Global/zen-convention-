@@ -10,7 +10,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Lightbox } from '../components/Lightbox';
+import { getGalleryBaseRate } from '../data/galleryRates';
 import { resolveImageSrc, resolveProductGallery } from '../data/sections';
+import { formatInr, formatListedPrice, RATE_MARKUP_INR } from '../utils/pricing';
 import './ProductGalleryPage.css';
 
 interface RemoteFigureProps {
@@ -179,6 +181,10 @@ export function ProductGalleryPage() {
               <em>{section.title.toLowerCase()}</em>
             </h2>
             <span className="pdp-gallery-rule" aria-hidden />
+            <p className="pdp-pricing-note">
+              Rates in <strong>INR</strong> include base decor plus{' '}
+              <strong>{formatInr(RATE_MARKUP_INR)}</strong> presentation &amp; coordination.
+            </p>
           </div>
           <div className="pdp-gallery-meta">
             <span className="pdp-gallery-count">{imageCountLabel}</span>
@@ -192,14 +198,22 @@ export function ProductGalleryPage() {
 
         <div className="pdp-gallery-grid">
           {seeds.map((seed, i) => {
-            const ref = String(i + 1).padStart(2, '0');
+            const refNum = i + 1;
+            const ref = String(refNum).padStart(2, '0');
+            const baseRate = getGalleryBaseRate(option.id, refNum);
+            const listed =
+              baseRate !== undefined ? formatListedPrice(baseRate) : null;
             return (
               <button
                 key={`grid-${seed}`}
                 type="button"
                 className="pdp-gcell"
                 onClick={() => openLightbox(i)}
-                aria-label={`Open image ${ref} of ${imageCountLabel}`}
+                aria-label={
+                  listed
+                    ? `Open image ${ref}, listed at ${listed}`
+                    : `Open image ${ref} of ${imageCountLabel}`
+                }
               >
                 <span className="pdp-gcell-frame">
                   <RemoteFigure
@@ -208,6 +222,11 @@ export function ProductGalleryPage() {
                     height={800}
                     fallbackClassName="pdp-gcell-fallback"
                   />
+                  {listed ? (
+                    <span className="pdp-gcell-price" aria-hidden>
+                      {listed}
+                    </span>
+                  ) : null}
                   <span className="pdp-gcell-overlay" aria-hidden>
                     <span className="pdp-gcell-pill">
                       <svg viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -225,9 +244,13 @@ export function ProductGalleryPage() {
                 </span>
                 <span className="pdp-gcell-caption">
                   <span className="pdp-gcell-ref">REF · {ref}</span>
-                  <span className="pdp-gcell-name">
-                    {section.title} / {option.label}
-                  </span>
+                  {listed ? (
+                    <span className="pdp-gcell-listed">{listed}</span>
+                  ) : (
+                    <span className="pdp-gcell-name">
+                      {section.title} / {option.label}
+                    </span>
+                  )}
                 </span>
               </button>
             );
@@ -246,6 +269,7 @@ export function ProductGalleryPage() {
       <Lightbox
         isOpen={lightboxOpen}
         seeds={seeds}
+        optionId={option.id}
         activeIndex={lightboxIndex}
         title={`${section.title} — ${option.label}`}
         subtitle={`${imageCountLabel} references`}

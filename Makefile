@@ -5,9 +5,9 @@
 # Quick rerun without touching ports:     `make dev`
 # =============================================================================
 
-DEV_PORTS ?= 3000 4173 5173 5174 5175 8080
+DEV_PORTS ?= 3000 4173 5173 5174 5175 8080 8888 24678
 
-.PHONY: default help install dev local start build preview ci clean kill-ports check-ports nuke
+.PHONY: default help install dev local start run build preview ci clean kill-ports check-ports security-check nuke
 
 ## default — free typical Vite/dev ports, then start dev server → http://localhost:5173
 default: local
@@ -33,6 +33,9 @@ local: kill-ports
 
 ## start — alias for local
 start: local
+
+## run — alias for local (one-shot dev)
+run: local
 
 ## build — type-check + emit dist/ for production
 build:
@@ -63,6 +66,15 @@ kill-ports:
 			echo "port $$p — free"; \
 		fi; \
 	done
+
+## security-check — scan tracked tree for common secret patterns (no .env)
+security-check:
+	@echo "==> Secret pattern scan (excluding node_modules)"
+	@! rg -i "api[_-]?key|secret|password|token|BEGIN PRIVATE|sk_live|sk_test" \
+		--glob '!.env*' --glob '!node_modules' --glob '!package-lock.json' --glob '!*.md' . 2>/dev/null \
+		|| (echo "FAIL: possible secret in repo — review above"; exit 1)
+	@test ! -f .env || (echo "FAIL: .env exists — must not be committed"; exit 1)
+	@echo "OK: no obvious secret patterns; .env not present"
 
 ## check-ports — show listeners on DEV_PORTS
 check-ports:

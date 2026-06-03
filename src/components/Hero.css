@@ -81,6 +81,9 @@
   pointer-events: none;
   user-select: none;
   overflow: hidden;
+  max-width: 100%;
+  padding-inline: max(0.5rem, env(safe-area-inset-left, 0px))
+    max(0.5rem, env(safe-area-inset-right, 0px));
 }
 
 .hero-wordmark {
@@ -89,6 +92,9 @@
   line-height: 0.84;
   text-transform: uppercase;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
   background: linear-gradient(
     160deg,
     rgba(168, 107, 69, 0.2) 0%,
@@ -189,6 +195,8 @@
   position: relative;
   z-index: 2;
   width: min(640px, 100%);
+  max-width: 100%;
+  padding-inline: 0.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -389,10 +397,28 @@
 
 @media (max-width: 540px) {
   .hero-wordmark--primary {
-    font-size: clamp(4.5rem, 28vw, 9rem);
+    font-size: clamp(3.75rem, 24vw, 9rem);
   }
   .hero-wordmark--secondary {
-    font-size: clamp(2rem, 12vw, 4rem);
-    letter-spacing: 0.42em;
+    font-size: clamp(1.75rem, 10vw, 4rem);
+    letter-spacing: 0.38em;
+    padding-left: 0.38em;
+  }
+  .hero-eyebrow {
+    letter-spacing: 0.3em;
+    gap: 0.55rem;
+  }
+  .hero-frame-inner {
+    width: min(100%, 280px);
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-wordmark--primary {
+    font-size: clamp(3.25rem, 22vw, 5rem);
+  }
+  .hero-wordmark--secondary {
+    font-size: clamp(1.5rem, 9vw, 3rem);
+    letter-spacing: 0.32em;
   }
 }

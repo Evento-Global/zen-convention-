@@ -12,7 +12,7 @@ out
 .vite
 *.tsbuildinfo
 
-# ---------- env / secrets (never commit — nothing here ships to GitHub safely) ----------
+# ---------- env / secrets (never commit) ----------
 .env
 .env.*
 !.env.example
@@ -26,15 +26,18 @@ service-account*.json
 **/application_default_credentials.json
 .gcp/
 .aws/
+.gcloud/
 
-# ---------- deploy tooling (may contain secrets or token cache) ----------
+# ---------- local reference assets (rates transcribed into src/data/galleryRates.ts) ----------
+Zen convention rate /
+Duplicates Evento/
+
+# ---------- hosting tool caches ----------
 .vercel
 .vercel/output
 .output
 .netlify
 .firebase
-.gcloud
-gcp-key.json
 
 # ---------- editor / IDE ----------
 .vscode/*

@@ -15,13 +15,16 @@ import {
   type MouseEvent as ReactMouseEvent,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { getGalleryBaseRate } from '../data/galleryRates';
 import { resolveImageSrc } from '../data/sections';
 import { useSwipe } from '../hooks/useSwipe';
+import { formatListedPrice } from '../utils/pricing';
 import './Lightbox.css';
 
 interface LightboxProps {
   readonly isOpen: boolean;
   readonly seeds: readonly string[];
+  readonly optionId?: string;
   readonly activeIndex: number;
   readonly title: string;
   readonly subtitle: string;
@@ -37,6 +40,7 @@ const MAX_VISIBLE_DRAG_Y = 160;
 export function Lightbox({
   isOpen,
   seeds,
+  optionId,
   activeIndex,
   title,
   subtitle,
@@ -122,6 +126,10 @@ export function Lightbox({
 
   const counterCurrent = String(activeIndex + 1).padStart(2, '0');
   const counterTotal = String(seeds.length).padStart(2, '0');
+  const refNum = activeIndex + 1;
+  const baseRate = optionId ? getGalleryBaseRate(optionId, refNum) : undefined;
+  const listedLabel =
+    baseRate !== undefined ? formatListedPrice(baseRate) : null;
 
   return createPortal(
     <div
@@ -200,6 +208,9 @@ export function Lightbox({
           )}
           <figcaption className="lb-caption">
             <span className="lb-caption-tag">REF · {counterCurrent}</span>
+            {listedLabel ? (
+              <span className="lb-caption-price">{listedLabel}</span>
+            ) : null}
             <span className="lb-caption-text">
               {title} · {subtitle}
             </span>
