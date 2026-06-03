@@ -94,7 +94,7 @@ Option IDs are defined in `src/data/sections.ts`.
 
 ## Pricing (INR)
 
-Base rates from internal reference material are in `src/data/galleryRates.ts`. The site shows **base + ₹30,000** (`src/utils/pricing.ts`). Options without rate data show no price badge.
+Listed prices are defined in `src/data/galleryRates.ts` and shown on gallery tiles where available.
 
 ---
 

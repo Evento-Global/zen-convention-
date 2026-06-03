@@ -426,20 +426,6 @@
   opacity: 0.55;
 }
 
-.pdp-pricing-note {
-  margin: 0.35rem 0 0;
-  max-width: 36rem;
-  font-size: 0.72rem;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-
-.pdp-pricing-note strong {
-  color: var(--accent-deep);
-  font-weight: 600;
-}
-
 .pdp-gallery-meta {
   display: inline-flex;
   align-items: center;
@@ -461,11 +447,6 @@
     width: 100%;
     justify-content: center;
     box-sizing: border-box;
-  }
-
-  .pdp-pricing-note {
-    max-width: 100%;
-    font-size: 0.68rem;
   }
 
   .pdp-head-kicker {

@@ -12,7 +12,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Lightbox } from '../components/Lightbox';
 import { getGalleryBaseRate } from '../data/galleryRates';
 import { resolveImageSrc, resolveProductGallery } from '../data/sections';
-import { formatInr, formatListedPrice, RATE_MARKUP_INR } from '../utils/pricing';
+import { formatListedPrice } from '../utils/pricing';
 import './ProductGalleryPage.css';
 
 interface RemoteFigureProps {
@@ -181,10 +181,6 @@ export function ProductGalleryPage() {
               <em>{section.title.toLowerCase()}</em>
             </h2>
             <span className="pdp-gallery-rule" aria-hidden />
-            <p className="pdp-pricing-note">
-              Rates in <strong>INR</strong> include base decor plus{' '}
-              <strong>{formatInr(RATE_MARKUP_INR)}</strong> presentation &amp; coordination.
-            </p>
           </div>
           <div className="pdp-gallery-meta">
             <span className="pdp-gallery-count">{imageCountLabel}</span>

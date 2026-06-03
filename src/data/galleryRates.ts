@@ -2,8 +2,8 @@ import { RATE_MARKUP_INR } from '../utils/pricing';
 
 /**
  * Base rates (INR) keyed by gallery option id and 1-based REF index.
- * Sourced from repo-root `Zen convention rate /` reference screenshots.
- * Site displays base + RATE_MARKUP_INR (see utils/pricing.ts).
+ * Sourced from internal reference material (not committed).
+ * Listed display values use utils/pricing.ts.
  */
 export type GalleryRateMap = Readonly<Record<number, number>>;
 
