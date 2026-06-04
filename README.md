@@ -34,7 +34,7 @@ Other useful targets: `make help` · `make dev` (skip port kill) · `make build`
 .
 ├── .github/workflows/ci.yml   # push/PR: npm ci + build (no secrets)
 ├── public/
-│   ├── logo.jpeg
+│   ├── brand/                 # Zen Convention SVG logos (from `zen convention logo:s/`)
 │   ├── _headers               # Netlify security headers (copied to dist)
 │   └── photos → ../photos     # symlink — required for /photos/… URLs
 ├── photos/                    # event imagery (scanned at build/dev)
@@ -56,7 +56,7 @@ Other useful targets: `make help` · `make dev` (skip port kill) · `make build`
 └── vite.config.ts
 ```
 
-Local-only (gitignored): `.env`, `Zen convention rate /` (reference screenshots; rates are in `galleryRates.ts`).
+Local-only (gitignored): `.env`, `Zen convention rate /`, `zen convention logo:s/` (SVGs committed under `public/brand/`).
 
 ---
 
@@ -95,6 +95,10 @@ Option IDs are defined in `src/data/sections.ts`.
 ## Pricing (INR)
 
 Listed prices are defined in `src/data/galleryRates.ts` and shown on gallery tiles where available.
+
+## Costing scope (all pages)
+
+The **Costing includes** block (`src/data/costingIncludes.ts`) appears on the home page and every product gallery — welcome board, entrance arch, backdrop, ambience elements, and table decor.
 
 ---
 

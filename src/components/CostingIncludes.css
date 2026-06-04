@@ -1,0 +1,128 @@
+.costing-includes {
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(2.5rem, 6vw, 4rem)
+    max(clamp(1.25rem, 4vw, 2.5rem), env(safe-area-inset-right, 0px))
+    clamp(2rem, 5vw, 3rem)
+    max(clamp(1.25rem, 4vw, 2.5rem), env(safe-area-inset-left, 0px));
+  border-top: 1px solid var(--border-soft);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 250, 0.6) 0%,
+    var(--bg-page) 100%
+  );
+}
+
+.costing-includes-inner {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.costing-includes-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+  margin-bottom: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+.costing-includes-kicker {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--accent-copper);
+}
+
+.costing-includes-kicker-line {
+  display: inline-block;
+  width: clamp(28px, 6vw, 48px);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 107, 69, 0.55),
+    transparent
+  );
+}
+
+.costing-includes-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-900);
+  text-wrap: balance;
+}
+
+.costing-includes-rule {
+  display: inline-block;
+  width: 48px;
+  height: 1px;
+  background: var(--accent-copper);
+  opacity: 0.55;
+}
+
+.costing-includes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.costing-includes-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 4px 14px rgba(44, 36, 34, 0.04);
+  min-width: 0;
+}
+
+.costing-includes-label {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.5vw, 1.08rem);
+  font-weight: 600;
+  color: var(--ink-900);
+  flex-shrink: 0;
+}
+
+.costing-includes-detail {
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-copper);
+  text-align: right;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .costing-includes-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .costing-includes-detail {
+    text-align: left;
+  }
+}
+
+/* PDP: align with gallery max width */
+.costing-includes--pdp .costing-includes-inner {
+  max-width: min(1240px, 100%);
+}

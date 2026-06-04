@@ -28,8 +28,9 @@ service-account*.json
 .aws/
 .gcloud/
 
-# ---------- local reference assets (rates transcribed into src/data/galleryRates.ts) ----------
+# ---------- local reference assets (committed copies live under public/brand) ----------
 Zen convention rate /
+zen convention logo:s/
 Duplicates Evento/
 
 # ---------- hosting tool caches ----------

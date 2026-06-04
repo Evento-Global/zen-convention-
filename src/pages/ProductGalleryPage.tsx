@@ -9,7 +9,9 @@
  */
 import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { CostingIncludes } from '../components/CostingIncludes';
 import { Lightbox } from '../components/Lightbox';
+import { SiteLogo } from '../components/SiteLogo';
 import { getGalleryBaseRate } from '../data/galleryRates';
 import { resolveImageSrc, resolveProductGallery } from '../data/sections';
 import { formatListedPrice } from '../utils/pricing';
@@ -124,7 +126,7 @@ export function ProductGalleryPage() {
         <div className="pdp-topbar-brand">
           <Link to="/" className="pdp-brand">
             <span className="pdp-brand-mark">
-              <img src="/logo.jpeg" alt="" width={72} height={72} decoding="async" />
+              <SiteLogo variant="horizontal" className="pdp-brand-logo" alt="" />
             </span>
             <span className="pdp-brand-divider" aria-hidden />
             <span className="pdp-brand-text">
@@ -253,6 +255,8 @@ export function ProductGalleryPage() {
           })}
         </div>
       </section>
+
+      <CostingIncludes className="costing-includes--pdp" />
 
       <footer className="pdp-footer">
         <span className="pdp-footer-mark">EVENTO GLOBAL</span>

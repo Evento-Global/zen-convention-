@@ -5,6 +5,7 @@
  *   • Editorial corner mark (top-left)
  *   • Eyebrow ornament + tagline + hairline scroll cue.
  */
+import { SiteLogo } from './SiteLogo';
 import './Hero.css';
 
 interface HeroProps {
@@ -52,14 +53,10 @@ export function Hero({ scrollTargetId }: HeroProps) {
 
           <div className="hero-frame-border">
             <div className="hero-frame-inner">
-              <img
+              <SiteLogo
+                variant="zen"
                 className="hero-logo"
-                src="/logo.jpeg"
-                alt="Evento Global Design & Management Company"
-                width={840}
-                height={840}
-                decoding="async"
-                fetchPriority="high"
+                alt="Zen Convention by Evento Global"
               />
             </div>
           </div>

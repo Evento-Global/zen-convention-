@@ -1,3 +1,4 @@
+import { CostingIncludes } from '../components/CostingIncludes';
 import { Hero } from '../components/Hero';
 import { SectionCard } from '../components/SectionCard';
 import { EVENT_SECTIONS } from '../data/sections';
@@ -49,6 +50,8 @@ export function HomePage() {
           </p>
         </div>
       </main>
+
+      <CostingIncludes />
 
       <footer className="page-footer">
         <div className="page-footer-inner">
