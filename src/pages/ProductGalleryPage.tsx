@@ -13,7 +13,13 @@ import { CostingIncludes } from '../components/CostingIncludes';
 import { Lightbox } from '../components/Lightbox';
 import { BrandLockup } from '../components/BrandLockup';
 import { getGalleryBaseRate } from '../data/galleryRates';
-import { resolveImageSrc, resolveProductGallery } from '../data/sections';
+import type { GalleryItem } from '../data/galleryItems';
+import {
+  LEGACY_OPTION_IDS,
+  resolveCanonicalOptionId,
+  resolveImageSrc,
+  resolveProductGallery,
+} from '../data/sections';
 import { formatListedPrice } from '../utils/pricing';
 import './ProductGalleryPage.css';
 
@@ -65,8 +71,9 @@ function RemoteFigure({
 
 export function ProductGalleryPage() {
   const { optionId } = useParams<{ optionId: string }>();
+  const canonicalId = optionId ? resolveCanonicalOptionId(optionId) : '';
   const resolved = optionId ? resolveProductGallery(optionId) : null;
-  const seeds = resolved?.option.galleryRefs ?? [];
+  const galleryItems: readonly GalleryItem[] = resolved?.option.galleryRefs ?? [];
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -84,19 +91,23 @@ export function ProductGalleryPage() {
   const closeLightbox = useCallback(() => setLightboxOpen(false), []);
 
   const goPrev = useCallback(() => {
-    setLightboxIndex((prev) => (prev - 1 + seeds.length) % seeds.length);
-  }, [seeds.length]);
+    setLightboxIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
+  }, [galleryItems.length]);
 
   const goNext = useCallback(() => {
-    setLightboxIndex((prev) => (prev + 1) % seeds.length);
-  }, [seeds.length]);
+    setLightboxIndex((prev) => (prev + 1) % galleryItems.length);
+  }, [galleryItems.length]);
 
-  if (!resolved || seeds.length === 0) {
+  if (optionId && optionId in LEGACY_OPTION_IDS) {
+    return <Navigate to={`/products/${canonicalId}`} replace />;
+  }
+
+  if (!resolved || galleryItems.length === 0) {
     return <Navigate to="/" replace />;
   }
 
   const { section, option } = resolved;
-  const imageCountLabel = String(seeds.length).padStart(2, '0');
+  const imageCountLabel = String(galleryItems.length).padStart(2, '0');
 
   return (
     <div className="pdp">
@@ -195,15 +206,15 @@ export function ProductGalleryPage() {
         </header>
 
         <div className="pdp-gallery-grid">
-          {seeds.map((seed, i) => {
-            const refNum = i + 1;
+          {galleryItems.map((item, i) => {
+            const refNum = item.ref;
             const ref = String(refNum).padStart(2, '0');
             const baseRate = getGalleryBaseRate(option.id, refNum);
             const listed =
               baseRate !== undefined ? formatListedPrice(baseRate) : null;
             return (
               <button
-                key={`grid-${seed}`}
+                key={`grid-${refNum}-${item.url}`}
                 type="button"
                 className="pdp-gcell"
                 onClick={() => openLightbox(i)}
@@ -215,7 +226,7 @@ export function ProductGalleryPage() {
               >
                 <span className="pdp-gcell-frame">
                   <RemoteFigure
-                    seed={seed}
+                    seed={item.url}
                     width={800}
                     height={800}
                     fallbackClassName="pdp-gcell-fallback"
@@ -268,7 +279,7 @@ export function ProductGalleryPage() {
 
       <Lightbox
         isOpen={lightboxOpen}
-        seeds={seeds}
+        items={galleryItems}
         optionId={option.id}
         activeIndex={lightboxIndex}
         title={`${section.title} — ${option.label}`}

@@ -13,14 +13,14 @@ const OUT_FILE = path.join(ROOT, 'src', 'data', 'photoManifest.generated.ts');
 /** Normalized folder label (trimmed) → option slug */
 const FOLDER_TO_OPTION = {
   'Haldi traditional': 'haldi-traditional',
-  'Haldi semi traditional - contemporary': 'haldi-semi-traditional-contemporary',
+  'Haldi semi traditional - contemporary': 'haldi-contemporary',
   'Pellikoduku- Pellikutru - traditional': 'pellikuturu-traditional',
   'Traditional mehendi': 'mehendi-traditional',
-  'Semi traditional - contemporary mehendi': 'mehendi-semi-traditional-contemporary',
+  'Semi traditional - contemporary mehendi': 'mehendi-contemporary',
   'Sangeet led screen': 'sangeet-led',
   'Sangeet structural backdrop': 'sangeet-structure',
   'Wedding traditional': 'wedding-traditional',
-  'Wedding semi traditional - contemporary': 'wedding-semi-traditional',
+  'Wedding semi traditional - contemporary': 'wedding-contemporary',
   'Cradle and birthday': 'cradle-birthday-contemporary',
   'Reception - engagement': 'reception-contemporary',
 };

@@ -16,6 +16,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { getGalleryBaseRate } from '../data/galleryRates';
+import type { GalleryItem } from '../data/galleryItems';
 import { resolveImageSrc } from '../data/sections';
 import { useSwipe } from '../hooks/useSwipe';
 import { formatListedPrice } from '../utils/pricing';
@@ -23,7 +24,7 @@ import './Lightbox.css';
 
 interface LightboxProps {
   readonly isOpen: boolean;
-  readonly seeds: readonly string[];
+  readonly items: readonly GalleryItem[];
   readonly optionId?: string;
   readonly activeIndex: number;
   readonly title: string;
@@ -39,7 +40,7 @@ const MAX_VISIBLE_DRAG_Y = 160;
 
 export function Lightbox({
   isOpen,
-  seeds,
+  items,
   optionId,
   activeIndex,
   title,
@@ -121,12 +122,13 @@ export function Lightbox({
   }, [swipe.dragging, swipe.dx, swipe.dy]);
 
   if (!isOpen) return null;
-  const activeSeed = seeds[activeIndex];
-  if (!activeSeed) return null;
+  const activeItem = items[activeIndex];
+  if (!activeItem) return null;
 
   const counterCurrent = String(activeIndex + 1).padStart(2, '0');
-  const counterTotal = String(seeds.length).padStart(2, '0');
-  const refNum = activeIndex + 1;
+  const counterTotal = String(items.length).padStart(2, '0');
+  const refNum = activeItem.ref;
+  const refLabel = String(refNum).padStart(2, '0');
   const baseRate = optionId ? getGalleryBaseRate(optionId, refNum) : undefined;
   const listedLabel =
     baseRate !== undefined ? formatListedPrice(baseRate) : null;
@@ -199,15 +201,15 @@ export function Lightbox({
             <div className="lb-fallback" role="img" aria-label="Image unavailable" />
           ) : (
             <img
-              key={activeSeed}
-              src={resolveImageSrc(activeSeed, 1600, 1200)}
+              key={activeItem.url}
+              src={resolveImageSrc(activeItem.url, 1600, 1200)}
               alt={`${title} reference ${counterCurrent}`}
               draggable={false}
               onError={() => setImgFailed(true)}
             />
           )}
           <figcaption className="lb-caption">
-            <span className="lb-caption-tag">REF · {counterCurrent}</span>
+            <span className="lb-caption-tag">REF · {refLabel}</span>
             {listedLabel ? (
               <span className="lb-caption-price">{listedLabel}</span>
             ) : null}
@@ -240,9 +242,9 @@ export function Lightbox({
       </div>
 
       <footer className="lb-strip" onClick={stopPropagation}>
-        {seeds.map((seed, i) => (
+        {items.map((item, i) => (
           <button
-            key={`${i}-${seed}`}
+            key={`${item.ref}-${item.url}`}
             type="button"
             className={
               i === activeIndex
@@ -261,7 +263,7 @@ export function Lightbox({
             }}
           >
             <img
-              src={resolveImageSrc(seed, 160, 160)}
+              src={resolveImageSrc(item.url, 160, 160)}
               alt=""
               loading="lazy"
               decoding="async"

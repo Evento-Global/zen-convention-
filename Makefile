@@ -6,8 +6,9 @@
 # =============================================================================
 
 DEV_PORTS ?= 3000 4173 5173 5174 5175 8080 8888 24678
+LIVE_URL ?= https://zen-convention.vercel.app
 
-.PHONY: default help install dev local start run build preview ci clean kill-ports check-ports security-check nuke
+.PHONY: default help install dev local start run build preview ci clean kill-ports check-ports security-check live-security-check nuke
 
 ## default — free typical Vite/dev ports, then start dev server → http://localhost:5173
 default: local
@@ -70,11 +71,34 @@ kill-ports:
 ## security-check — scan tracked tree for common secret patterns (no .env)
 security-check:
 	@echo "==> Secret pattern scan (excluding node_modules)"
-	@! rg -i "api[_-]?key|secret|password|token|BEGIN PRIVATE|sk_live|sk_test" \
-		--glob '!.env*' --glob '!node_modules' --glob '!package-lock.json' --glob '!*.md' . 2>/dev/null \
-		|| (echo "FAIL: possible secret in repo — review above"; exit 1)
+	@if command -v rg >/dev/null 2>&1; then \
+		! rg -i "api[_-]?key|secret|password|token|BEGIN PRIVATE|sk_live|sk_test" \
+			--glob '!.env*' --glob '!node_modules' --glob '!package-lock.json' --glob '!*.md' . \
+			|| (echo "FAIL: possible secret in repo — review above"; exit 1); \
+	else \
+		! grep -rniE "api[_-]?key|secret|password|token|BEGIN PRIVATE|sk_live|sk_test" \
+			--exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist \
+			--exclude='package-lock.json' --exclude='*.md' --exclude='.env.example' \
+			src scripts public index.html vite.config.ts 2>/dev/null \
+			|| (echo "FAIL: possible secret in repo — review above"; exit 1); \
+	fi
 	@test ! -f .env || (echo "FAIL: .env exists — must not be committed"; exit 1)
+	@test -z "$$(git ls-files '.env' 2>/dev/null | grep -v '^\.env\.example$$')" || (echo "FAIL: .env tracked by git"; exit 1)
+	@test -z "$$(git ls-files | grep -iE '\.(pem|key|p12)$$|credentials\.json|service-account')" || (echo "FAIL: credential file tracked"; exit 1)
 	@echo "OK: no obvious secret patterns; .env not present"
+
+## live-security-check — probe deployed static site (override LIVE_URL=...)
+live-security-check:
+	@echo "==> Probing $(LIVE_URL)"
+	@for path in / /api /api/v1 /swagger /swagger-ui /openapi.json /.env /graphql /admin; do \
+		code=$$(curl -sS -o /tmp/zen-live-probe.txt -w '%{http_code}' "$(LIVE_URL)$$path" 2>/dev/null || echo 000); \
+		echo "$$path -> HTTP $$code"; \
+	done
+	@echo "==> Body scan (must not contain secrets)"
+	@curl -sS "$(LIVE_URL)/" -o /tmp/zen-live-home.html 2>/dev/null || (echo "FAIL: cannot reach $(LIVE_URL)"; exit 1)
+	@! grep -qiE 'api[_-]?key|BEGIN PRIVATE|sk_live|sk_test|VITE_[A-Z_]+=' /tmp/zen-live-home.html 2>/dev/null \
+		|| (echo "FAIL: suspicious content on home page"; exit 1)
+	@echo "OK: live probe complete for $(LIVE_URL)"
 
 ## check-ports — show listeners on DEV_PORTS
 check-ports:

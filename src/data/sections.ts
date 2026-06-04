@@ -1,4 +1,5 @@
 import { OPTION_GALLERY_URLS, SECTION_COVER_URL } from './photoManifest.generated';
+import { buildGalleryItems, type GalleryItem } from './galleryItems';
 import { picsumPlaceholderUrl } from './mediaUrls';
 
 export type SectionId =
@@ -19,7 +20,7 @@ export interface EventStyleOption {
   readonly id: string;
   readonly label: string;
   /** Local `/photos/…` paths and/or Picsum seed strings (reception placeholders). */
-  readonly galleryRefs: readonly string[];
+  readonly galleryRefs: readonly GalleryItem[];
 }
 
 export interface EventSection {
@@ -38,10 +39,15 @@ function picsumGallery(prefix: string, count: number): readonly string[] {
   return Array.from({ length: count }, (_, i) => `${prefix}-${i + 1}`);
 }
 
-function galleryForOption(optionId: string, picsumPrefix: string, count = 12): readonly string[] {
+function galleryForOption(
+  optionId: string,
+  picsumPrefix: string,
+  count = 12,
+): readonly GalleryItem[] {
   const pack = OPTION_GALLERY_URLS[optionId as keyof typeof OPTION_GALLERY_URLS];
-  if (pack && pack.length > 0) return pack;
-  return picsumGallery(picsumPrefix, count);
+  const urls =
+    pack && pack.length > 0 ? pack : picsumGallery(picsumPrefix, count);
+  return buildGalleryItems(optionId, urls);
 }
 
 function coverForSection(sectionId: SectionId): string | undefined {
@@ -61,9 +67,9 @@ export const EVENT_SECTIONS: readonly EventSection[] = [
         galleryRefs: galleryForOption('haldi-traditional', 'haldi-traditional'),
       },
       {
-        id: 'haldi-semi-traditional-contemporary',
-        label: 'Semi traditional / contemporary',
-        galleryRefs: galleryForOption('haldi-semi-traditional-contemporary', 'haldi-semi-traditional-contemporary'),
+        id: 'haldi-contemporary',
+        label: 'Contemporary',
+        galleryRefs: galleryForOption('haldi-contemporary', 'haldi-contemporary'),
       },
     ],
     imageSeed: 'haldi-evento',
@@ -94,9 +100,9 @@ export const EVENT_SECTIONS: readonly EventSection[] = [
         galleryRefs: galleryForOption('mehendi-traditional', 'mehendi-traditional'),
       },
       {
-        id: 'mehendi-semi-traditional-contemporary',
-        label: 'Semi traditional / contemporary',
-        galleryRefs: galleryForOption('mehendi-semi-traditional-contemporary', 'mehendi-semi-traditional-contemporary'),
+        id: 'mehendi-contemporary',
+        label: 'Contemporary',
+        galleryRefs: galleryForOption('mehendi-contemporary', 'mehendi-contemporary'),
       },
     ],
     imageSeed: 'mehendi-evento',
@@ -132,9 +138,9 @@ export const EVENT_SECTIONS: readonly EventSection[] = [
         galleryRefs: galleryForOption('wedding-traditional', 'wedding-traditional'),
       },
       {
-        id: 'wedding-semi-traditional',
-        label: 'Semi traditional',
-        galleryRefs: galleryForOption('wedding-semi-traditional', 'wedding-semi-traditional'),
+        id: 'wedding-contemporary',
+        label: 'Contemporary',
+        galleryRefs: galleryForOption('wedding-contemporary', 'wedding-contemporary'),
       },
     ],
     imageSeed: 'wedding-evento',
@@ -175,12 +181,25 @@ export interface ResolvedStyleOption {
   readonly option: EventStyleOption;
 }
 
+/** Old slugs → current option ids (bookmarks / shared links). */
+export const LEGACY_OPTION_IDS: Readonly<Record<string, string>> = {
+  'haldi-semi-traditional-contemporary': 'haldi-contemporary',
+  'mehendi-semi-traditional-contemporary': 'mehendi-contemporary',
+  'wedding-semi-traditional': 'wedding-contemporary',
+};
+
+/** Resolve gallery route slug (e.g. `/products/haldi-traditional`). */
+export function resolveCanonicalOptionId(optionId: string): string {
+  const trimmed = optionId.trim();
+  return LEGACY_OPTION_IDS[trimmed] ?? trimmed;
+}
+
 /** Resolve gallery route slug (e.g. `/products/haldi-traditional`). */
 export function resolveProductGallery(optionId: string): ResolvedStyleOption | null {
-  const trimmed = optionId.trim();
-  if (!trimmed) return null;
+  const canonical = resolveCanonicalOptionId(optionId);
+  if (!canonical) return null;
   for (const section of EVENT_SECTIONS) {
-    const match = section.styleOptions.find((o) => o.id === trimmed);
+    const match = section.styleOptions.find((o) => o.id === canonical);
     if (match) return { section, option: match };
   }
   return null;

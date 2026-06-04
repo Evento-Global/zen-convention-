@@ -13,5 +13,13 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/.env", "destination": "/404", "permanent": false },
+    { "source": "/api/:path*", "destination": "/404", "permanent": false },
+    { "source": "/swagger:path*", "destination": "/404", "permanent": false },
+    { "source": "/swagger-ui:path*", "destination": "/404", "permanent": false },
+    { "source": "/openapi.json", "destination": "/404", "permanent": false },
+    { "source": "/graphql", "destination": "/404", "permanent": false }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

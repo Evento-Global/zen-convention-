@@ -47,7 +47,7 @@ export const OPTION_GALLERY_URLS = {
     "/photos/Cradle%20and%20birthday%20/f9009766-5029-4dbb-894e-e92741e760d4.jpg",
     "/photos/Cradle%20and%20birthday%20/fff36493-2b67-45d3-88a9-1f3c98b6b19e.jpg",
   ],
-  "haldi-semi-traditional-contemporary": [
+  "haldi-contemporary": [
     "/photos/Haldi%20semi%20traditional%20-%20contemporary%20/0bf08972-66cb-4ef0-a433-3b377f53248f.jpg",
     "/photos/Haldi%20semi%20traditional%20-%20contemporary%20/0ff642cf-30d2-4528-b0f8-1a79ace113ad.jpg",
     "/photos/Haldi%20semi%20traditional%20-%20contemporary%20/1fc18ca0-b452-484a-bdea-ee78e865bab0.jpg",
@@ -120,7 +120,7 @@ export const OPTION_GALLERY_URLS = {
     "/photos/Haldi%20traditional%20/ee96f05b-07dd-445f-9d2e-f10e113d88e0.jpg",
     "/photos/Haldi%20traditional%20/fb0834ae-f9b0-4ae0-b1dc-5043489e1e74.jpg",
   ],
-  "mehendi-semi-traditional-contemporary": [
+  "mehendi-contemporary": [
     "/photos/Semi%20traditional%20-%20contemporary%20mehendi%20/0c7e3d4f-048e-41cc-b116-25f1917c771b.jpg",
     "/photos/Semi%20traditional%20-%20contemporary%20mehendi%20/0e035b5c-547b-4d7a-b7b5-73f956b7c851.jpg",
     "/photos/Semi%20traditional%20-%20contemporary%20mehendi%20/0fed5adf-efdf-4db5-8ace-2607841c18b1.jpg",
@@ -389,7 +389,7 @@ export const OPTION_GALLERY_URLS = {
     "/photos/Sangeet%20structural%20backdrop%20/f0644a17-d875-4a51-8e67-e06b1fcf7e3f.jpg",
     "/photos/Sangeet%20structural%20backdrop%20/fe789150-b67b-437f-841f-cf9fd370b64f.jpg",
   ],
-  "wedding-semi-traditional": [
+  "wedding-contemporary": [
     "/photos/Wedding%20semi%20traditional%20-%20contemporary%20/1bfd2840-5c53-4c6d-a3bc-6df2d1594df3.jpg",
     "/photos/Wedding%20semi%20traditional%20-%20contemporary%20/1fd7273b-be60-4632-ae8f-bfdc578f2ee1.jpg",
     "/photos/Wedding%20semi%20traditional%20-%20contemporary%20/2c6a5fde-b17a-4f8b-ae37-a8edacc43ca8.jpg",

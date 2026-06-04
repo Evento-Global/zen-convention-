@@ -25,12 +25,19 @@ credentials.json
 service-account*.json
 **/application_default_credentials.json
 .gcp/
-.aws/
 .gcloud/
+.gcloudignore
+.docker/
+Dockerfile
+docker-compose*.yml
+deploy/
+.aws/
 
 # ---------- local reference assets (committed copies live under public/brand) ----------
 Zen convention rate /
 more prices/
+even more prices/
+even even more prices/
 zen convention logo:s/
 Duplicates Evento/
 
