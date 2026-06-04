@@ -291,8 +291,8 @@
 }
 
 .hero-frame-inner {
-  width: clamp(220px, 38vw, 340px);
-  aspect-ratio: 1 / 1;
+  width: clamp(260px, 48vw, 400px);
+  aspect-ratio: 5 / 4;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--bg-elevated);

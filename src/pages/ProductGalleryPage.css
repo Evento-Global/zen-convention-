@@ -62,9 +62,8 @@
     display: none;
   }
   .pdp-brand-mark {
-    max-width: min(200px, 62vw);
-    height: 36px;
-    padding: 0.2rem 0.4rem;
+    max-width: min(220px, 68vw);
+    height: 38px;
   }
   .pdp-brand-name {
     font-size: 0.82rem;
@@ -102,17 +101,16 @@
 
 .pdp-brand-mark {
   width: auto;
-  max-width: min(240px, 58vw);
+  max-width: min(260px, 62vw);
   height: 46px;
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;
-  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 6px 16px rgba(44, 36, 34, 0.08);
   flex-shrink: 0;
 }
 
