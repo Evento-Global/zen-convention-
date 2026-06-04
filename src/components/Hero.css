@@ -226,88 +226,22 @@
   );
 }
 
-/* framed product-shot pedestal */
-.hero-frame {
-  position: relative;
+/* Two logo specimen boxes side by side — no extra outer frame */
+.hero-brand {
   margin: 0 0 clamp(2.1rem, 4.5vw, 2.85rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.95rem;
-  animation: fade-rise 1.05s 0.15s var(--ease-soft) both;
-}
-
-.hero-frame-ornament {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 1px solid rgba(168, 107, 69, 0.45);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.hero-frame-ornament--tl {
-  top: -6px;
-  left: -6px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.hero-frame-ornament--tr {
-  top: -6px;
-  right: -6px;
-  border-left: none;
-  border-bottom: none;
-}
-
-.hero-frame-ornament--bl {
-  bottom: -6px;
-  left: -6px;
-  border-right: none;
-  border-top: none;
-}
-
-.hero-frame-ornament--br {
-  bottom: -6px;
-  right: -6px;
-  border-left: none;
-  border-top: none;
-}
-
-.hero-frame-border {
-  position: relative;
-  padding: 2px;
-  border-radius: calc(var(--radius-xl) + 4px);
-  background: linear-gradient(
-    150deg,
-    rgba(201, 162, 122, 0.7),
-    rgba(183, 110, 121, 0.55) 35%,
-    rgba(255, 255, 255, 0.95) 70%,
-    rgba(168, 107, 69, 0.55)
-  );
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.85) inset,
-    var(--shadow-lift);
-}
-
-.hero-frame-inner {
-  width: clamp(260px, 48vw, 400px);
-  aspect-ratio: 5 / 4;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: var(--bg-elevated);
+  width: min(100%, 440px);
+  padding: 0;
+  border: 0;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.85rem, 2.2vw, 1.25rem);
-}
-
-.hero-frame-inner .brand-lockup--hero {
+  animation: fade-rise 1.05s 0.15s var(--ease-soft) both;
   transition: transform 1.2s var(--ease-soft);
 }
 
-.hero-frame:hover .brand-lockup--hero {
-  transform: scale(1.02);
+.hero-brand:hover .brand-lockup--hero {
+  transform: scale(1.015);
 }
 
 /* tagline + cta */

@@ -1,107 +1,126 @@
+/* Two separate presentation boxes — logos sit on an inner mat, not edge-to-edge. */
+
 .brand-lockup {
   display: flex;
   flex-direction: row;
   align-items: stretch;
   justify-content: center;
-  gap: clamp(0.5rem, 2vw, 0.85rem);
+  gap: clamp(0.65rem, 2.5vw, 1.1rem);
   min-width: 0;
   width: 100%;
-  height: 100%;
 }
 
+/* Outer frame (the “box”) */
 .brand-lockup__box {
   flex: 1 1 0;
   min-width: 0;
+  padding: 3px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(168, 107, 69, 0.28);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 253, 250, 0.98) 0%,
+    rgba(247, 236, 229, 0.95) 100%
+  );
+  box-shadow: 0 8px 22px rgba(44, 36, 34, 0.07);
+}
+
+/* Inner mat — logo floats here so it reads as artwork, not as the box itself */
+.brand-lockup__mat {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.45rem, 1.8vw, 0.75rem);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-soft);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 6px 18px rgba(44, 36, 34, 0.06);
+  padding: clamp(0.75rem, 4cqi, 1.35rem);
+  border-radius: calc(var(--radius-lg) - 4px);
+  background: #ffffff;
+  border: 1px solid rgba(183, 110, 121, 0.12);
 }
 
 .brand-lockup__img {
   display: block;
   width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
-/* ----- hero ----- */
+.brand-lockup__img--evento {
+  max-width: 78%;
+  max-height: 78%;
+  border-radius: 4px;
+}
+
+.brand-lockup__img--zen {
+  max-width: 92%;
+  max-height: 72%;
+}
+
+/* ----- hero: two equal specimen boxes side by side ----- */
 .brand-lockup--hero {
-  max-height: 100%;
+  max-width: min(420px, 100%);
 }
 
 .brand-lockup--hero .brand-lockup__box {
-  min-height: 0;
-  aspect-ratio: 1 / 1;
+  min-height: clamp(120px, 28vw, 168px);
 }
 
-.brand-lockup--hero .brand-lockup__box--evento .brand-lockup__img {
-  max-height: 88%;
-  max-width: 88%;
+.brand-lockup--hero .brand-lockup__mat {
+  min-height: clamp(108px, 26vw, 152px);
 }
 
-.brand-lockup--hero .brand-lockup__box--zen .brand-lockup__img {
+.brand-lockup--hero .brand-lockup__img--evento {
+  max-width: 72%;
   max-height: 72%;
-  max-width: 95%;
+}
+
+.brand-lockup--hero .brand-lockup__img--zen {
+  max-width: 88%;
+  max-height: 65%;
 }
 
 /* ----- top bar ----- */
 .brand-lockup--bar {
   height: 100%;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .brand-lockup--bar .brand-lockup__box {
-  padding: 0.28rem 0.4rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(44, 36, 34, 0.05);
+  flex: 1 1 0;
+  padding: 2px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(44, 36, 34, 0.05);
 }
 
-.brand-lockup--bar .brand-lockup__box--evento {
-  flex: 0 0 auto;
-  width: 42px;
+.brand-lockup--bar .brand-lockup__mat {
+  padding: 0.35rem 0.5rem;
+  min-height: 38px;
 }
 
-.brand-lockup--bar .brand-lockup__box--evento .brand-lockup__img {
-  width: 100%;
-  height: 100%;
-  max-height: 36px;
-  aspect-ratio: 1 / 1;
+.brand-lockup--bar .brand-lockup__img--evento {
+  max-height: 32px;
+  max-width: 100%;
 }
 
-.brand-lockup--bar .brand-lockup__box--zen {
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: min(150px, 40vw);
-}
-
-.brand-lockup--bar .brand-lockup__box--zen .brand-lockup__img {
-  max-height: 34px;
+.brand-lockup--bar .brand-lockup__img--zen {
+  max-height: 30px;
+  max-width: 100%;
   width: 100%;
 }
 
 @media (max-width: 540px) {
-  .brand-lockup--bar .brand-lockup__box--evento {
-    width: 34px;
+  .brand-lockup--bar .brand-lockup__mat {
+    min-height: 32px;
+    padding: 0.28rem 0.4rem;
   }
 
-  .brand-lockup--bar .brand-lockup__box--evento .brand-lockup__img {
-    max-height: 30px;
+  .brand-lockup--bar .brand-lockup__img--evento {
+    max-height: 26px;
   }
 
-  .brand-lockup--bar .brand-lockup__box--zen {
-    max-width: min(120px, 48vw);
-  }
-
-  .brand-lockup--bar .brand-lockup__box--zen .brand-lockup__img {
-    max-height: 28px;
+  .brand-lockup--bar .brand-lockup__img--zen {
+    max-height: 24px;
   }
 }

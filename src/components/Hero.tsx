@@ -1,7 +1,7 @@
 /**
  * Hero — manufacturer PDP-inspired front of book.
  *
- *   • Oversized brand wordmark (background)  ↔ centred logo "specimen card".
+ *   • Oversized brand wordmark (background)  ↔ dual logo specimen boxes.
  *   • Editorial corner mark (top-left)
  *   • Eyebrow ornament + tagline + hairline scroll cue.
  */
@@ -45,17 +45,8 @@ export function Hero({ scrollTargetId }: HeroProps) {
           <span className="hero-eyebrow-mark" aria-hidden />
         </p>
 
-        <figure className="hero-frame">
-          <span className="hero-frame-ornament hero-frame-ornament--tl" aria-hidden />
-          <span className="hero-frame-ornament hero-frame-ornament--tr" aria-hidden />
-          <span className="hero-frame-ornament hero-frame-ornament--bl" aria-hidden />
-          <span className="hero-frame-ornament hero-frame-ornament--br" aria-hidden />
-
-          <div className="hero-frame-border">
-            <div className="hero-frame-inner">
-              <BrandLockup layout="hero" />
-            </div>
-          </div>
+        <figure className="hero-brand">
+          <BrandLockup layout="hero" />
         </figure>
 
         <p className="hero-tagline">
