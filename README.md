@@ -94,7 +94,7 @@ Option IDs are defined in `src/data/sections.ts`.
 
 ## Pricing (INR)
 
-Listed prices are defined in `src/data/galleryRates.ts` and shown on gallery tiles where available.
+Listed prices are defined in `src/data/galleryRates.ts` and shown on gallery tiles where available. Update rates from internal reference folders (`Zen convention rate /`, `more prices/`) — transcribed into `galleryRates.ts` (folders are gitignored).
 
 ## Costing scope (all pages)
 
