@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { CostingIncludes } from '../components/CostingIncludes';
 import { Lightbox } from '../components/Lightbox';
-import { SiteLogo } from '../components/SiteLogo';
+import { BrandLockup } from '../components/BrandLockup';
 import { getGalleryBaseRate } from '../data/galleryRates';
 import { resolveImageSrc, resolveProductGallery } from '../data/sections';
 import { formatListedPrice } from '../utils/pricing';
@@ -126,7 +126,7 @@ export function ProductGalleryPage() {
         <div className="pdp-topbar-brand">
           <Link to="/" className="pdp-brand">
             <span className="pdp-brand-mark">
-              <SiteLogo variant="horizontal" className="pdp-brand-logo" alt="" />
+              <BrandLockup layout="bar" />
             </span>
             <span className="pdp-brand-divider" aria-hidden />
             <span className="pdp-brand-text">

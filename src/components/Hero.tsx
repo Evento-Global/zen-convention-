@@ -5,7 +5,7 @@
  *   • Editorial corner mark (top-left)
  *   • Eyebrow ornament + tagline + hairline scroll cue.
  */
-import { SiteLogo } from './SiteLogo';
+import { BrandLockup } from './BrandLockup';
 import './Hero.css';
 
 interface HeroProps {
@@ -53,11 +53,7 @@ export function Hero({ scrollTargetId }: HeroProps) {
 
           <div className="hero-frame-border">
             <div className="hero-frame-inner">
-              <SiteLogo
-                variant="zen"
-                className="hero-logo"
-                alt="Zen Convention by Evento Global"
-              />
+              <BrandLockup layout="hero" />
             </div>
           </div>
         </figure>

@@ -302,17 +302,11 @@
   padding: clamp(0.85rem, 2.2vw, 1.25rem);
 }
 
-.hero-logo {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
+.hero-frame-inner .brand-lockup--hero {
   transition: transform 1.2s var(--ease-soft);
 }
 
-.hero-frame:hover .hero-logo {
+.hero-frame:hover .brand-lockup--hero {
   transform: scale(1.02);
 }
 

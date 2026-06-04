@@ -1,0 +1,98 @@
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* ----- hero: stacked Evento + Zen ----- */
+.brand-lockup--hero {
+  flex-direction: column;
+  gap: clamp(0.65rem, 2.5vw, 1rem);
+  width: 100%;
+  height: 100%;
+  padding: 0.15rem 0;
+}
+
+.brand-lockup--hero .brand-lockup__evento {
+  width: auto;
+  max-width: 72%;
+  max-height: 42%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand-lockup--hero .brand-lockup__rule {
+  display: block;
+  width: clamp(40px, 18%, 72px);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 107, 69, 0.45),
+    transparent
+  );
+  flex-shrink: 0;
+}
+
+.brand-lockup--hero .brand-lockup__zen {
+  width: 100%;
+  max-width: 100%;
+  max-height: 48%;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+/* ----- top bar: Evento mark + Zen horizontal ----- */
+.brand-lockup--bar {
+  flex-direction: row;
+  gap: 0.55rem;
+  height: 100%;
+  max-width: 100%;
+}
+
+.brand-lockup--bar .brand-lockup__evento {
+  width: auto;
+  height: 100%;
+  max-height: 42px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.brand-lockup--bar .brand-lockup__bar-divider {
+  width: 1px;
+  align-self: stretch;
+  min-height: 28px;
+  background: var(--hairline);
+  flex-shrink: 0;
+}
+
+.brand-lockup--bar .brand-lockup__zen {
+  height: 100%;
+  width: auto;
+  max-width: min(140px, 38vw);
+  object-fit: contain;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+@media (max-width: 540px) {
+  .brand-lockup--bar {
+    gap: 0.4rem;
+  }
+
+  .brand-lockup--bar .brand-lockup__evento {
+    max-height: 34px;
+  }
+
+  .brand-lockup--bar .brand-lockup__zen {
+    max-width: min(120px, 48vw);
+  }
+}

@@ -34,7 +34,7 @@ Other useful targets: `make help` · `make dev` (skip port kill) · `make build`
 .
 ├── .github/workflows/ci.yml   # push/PR: npm ci + build (no secrets)
 ├── public/
-│   ├── brand/                 # Zen Convention SVG logos (deployed assets)
+│   ├── brand/                 # Evento (JPEG) + Zen Convention SVG logos
 │   ├── _headers               # Netlify security headers (copied to dist)
 │   └── photos → ../photos     # symlink — required for /photos/… URLs
 ├── photos/                    # event imagery (scanned at build/dev)

@@ -62,13 +62,9 @@
     display: none;
   }
   .pdp-brand-mark {
-    width: auto;
-    max-width: min(140px, 52vw);
+    max-width: min(200px, 62vw);
     height: 36px;
-  }
-
-  .pdp-brand-logo {
-    max-width: 100%;
+    padding: 0.2rem 0.4rem;
   }
   .pdp-brand-name {
     font-size: 0.82rem;
@@ -106,9 +102,9 @@
 
 .pdp-brand-mark {
   width: auto;
-  max-width: 180px;
+  max-width: min(240px, 58vw);
   height: 46px;
-  padding: 0.2rem 0.35rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 12px;
   overflow: hidden;
   display: inline-flex;
@@ -118,15 +114,6 @@
   border: 1px solid var(--border-soft);
   box-shadow: 0 6px 16px rgba(44, 36, 34, 0.08);
   flex-shrink: 0;
-}
-
-.pdp-brand-mark img,
-.pdp-brand-logo {
-  display: block;
-  height: 100%;
-  width: auto;
-  max-width: min(160px, 42vw);
-  object-fit: contain;
 }
 
 .pdp-brand-divider {
